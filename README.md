@@ -2,6 +2,8 @@
 
 Team:  Indar Kumar, [Sai Vamsi Pujari](https://github.com/svamsip)
 
+![booksmadeeasy](./imgs/booksmadeeasy.png)
+
 # Objective: 
 Upload books seamlessly and pose inquiries without tedious searching for
 1. **Effortless Book Exploration:**
