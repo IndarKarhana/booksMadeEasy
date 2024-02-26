@@ -6,18 +6,22 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.runnables import RunnablePassthrough
+from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 template = """
 Make sure to answer the question in english unless the question is in different Language,
-Answer the question based only on the following context: 
+Answer the question based only on the following context, add the file-name and page-numbers at the end of the answer for reference.: 
 {context}
 
 Question: {question}
 """
 
 prompt = ChatPromptTemplate.from_template(template)
+
+
+def format_docs(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
 
 
 def main():
@@ -77,12 +81,38 @@ def main():
                 | StrOutputParser()
             )
 
+            ## RAG Chain from docs =
+            rag_chain_from_docs = (
+                RunnablePassthrough.assign(
+                    context=(lambda x: format_docs(x["context"]))
+                )
+                | prompt
+                | llm_model
+                | StrOutputParser()
+            )
+
+            rag_chain_with_source = RunnableParallel(
+                {
+                    "context": vectordb.as_retriever(
+                        search_kwargs={"k": 3, "search_type": "similarity"}
+                    ),
+                    "question": RunnablePassthrough(),
+                }
+            ).assign(answer=rag_chain_from_docs)
+
             with col1:
+
                 st.header("Query")
                 input_text = st.text_area("Enter Text", height=300)
                 if st.button("Submit"):
                     with st.spinner("Processing..."):
-                        output_text = rag_chain.invoke(input_text)
+                        response = rag_chain_with_source.invoke(input_text)
+                        output_text = response["answer"] + "\n"
+
+                        output_text += (
+                            "Following pages has additional information for reference: "
+                            + str([doc.metadata["page"] for doc in response["context"]])
+                        )
                         st.header("Output")
                         st.write(output_text)
         else:
