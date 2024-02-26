@@ -68,18 +68,18 @@ def main():
                 )
             st.success("Processing finished.")
 
-            ## RAG Chain
-            rag_chain = (
-                {
-                    "context": vectordb.as_retriever(
-                        search_kwargs={"k": 3, "search_type": "similarity"}
-                    ),
-                    "question": RunnablePassthrough(),
-                }
-                | prompt
-                | llm_model
-                | StrOutputParser()
-            )
+            ## RAG Chain with out source documents in output
+            # rag_chain = (
+            #     {
+            #         "context": vectordb.as_retriever(
+            #             search_kwargs={"k": 3, "search_type": "similarity"}
+            #         ),
+            #         "question": RunnablePassthrough(),
+            #     }
+            #     | prompt
+            #     | llm_model
+            #     | StrOutputParser()
+            # )
 
             ## RAG Chain from docs =
             rag_chain_from_docs = (
