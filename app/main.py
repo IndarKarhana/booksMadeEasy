@@ -106,10 +106,10 @@ def main():
                 if st.button("Submit"):
                     with st.spinner("Processing..."):
                         response = rag_chain_with_source.invoke(input_text)
-                        output_text = response["answer"] + "\n"
+                        output_text = response["answer"]
 
                         output_text += (
-                            f"Following {uploaded_file.name}'s pages has additional information for reference: "
+                            f" Following pages from {uploaded_file.name} has additional information for reference: "
                             + str([doc.metadata["page"] for doc in response["context"]])
                         )
                         st.header("Output")
