@@ -101,7 +101,6 @@ def main():
             ).assign(answer=rag_chain_from_docs)
 
             with col1:
-
                 st.header("Query")
                 input_text = st.text_area("Enter Text", height=300)
                 if st.button("Submit"):
@@ -110,7 +109,7 @@ def main():
                         output_text = response["answer"] + "\n"
 
                         output_text += (
-                            "Following pages has additional information for reference: "
+                            f"Following {uploaded_file.name}'s pages has additional information for reference: "
                             + str([doc.metadata["page"] for doc in response["context"]])
                         )
                         st.header("Output")
