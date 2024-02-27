@@ -118,7 +118,7 @@ def main():
             st.error("Invalid api key.")
     st.sidebar.markdown("### Disclaimer")
     st.sidebar.write(
-        "The key is not saved or stored anywhere. \
+        "Attention! Tier 1 OpenAI key is expected. The key is not saved or stored anywhere. \
             It is only used for authentication purposes during the session"
     )
 
