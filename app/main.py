@@ -106,8 +106,7 @@ def main():
                             st.write(output_text)
         elif not OPENAI_KEY:
             st.error("Please enter an API key.")
-    img = Image.open("booksmadeeasy.png")
-    st.sidebar.image(img, caption='', use_column_width=True)     
+    st.sidebar.image('https://github.com/IndarKarhana/booksMadeEasy/blob/main/imgs/booksmadeeasy.png?raw=true', caption='', use_column_width=True)     
     st.sidebar.markdown("### Disclaimer")
     st.sidebar.write(
         "Tier 1 OpenAI key is expected. The key is not saved or stored anywhere. \
