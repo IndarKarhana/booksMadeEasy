@@ -15,6 +15,9 @@ Upload books seamlessly and pose inquiries without tedious searching for
 3. **Optimized Learning Experience:**
    Elevate your learning journey with this application. Students can swiftly find answers to specific questions, educators enhance lesson planning, researchers streamline information gathering, and book enthusiasts enjoy a richer reading experience. The support for multiple languages breaks down barriers, ensuring a global reach and inclusive access to valuable knowledge.
 
+## Demo
+[booksmadeeasy](https://booksmadeeasy-lgcnv4djlvyegtov46ds9m.streamlit.app/)
+
 ## Tech stack
 
  - Framework: LangChain
