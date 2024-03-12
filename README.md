@@ -21,7 +21,7 @@ Upload books seamlessly and pose inquiries without tedious searching for
  - LLM: OpenAI
  - VectorStore: FAISS
  - UI: Streamlit
- - Evaluations: TrueLen-eval
+ - Evaluations: TrueLens-eval
 
 
 
